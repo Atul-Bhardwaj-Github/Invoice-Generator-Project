@@ -1,0 +1,39 @@
+.element{
+    width: 80%;
+    margin:20px auto;
+}
+
+#logo{
+    clip-path: circle(50% at 50% 50%);
+    width: 120px;
+}
+
+
+hr{
+    width: 80%;
+    margin: 20px auto;
+}
+
+
+.left{
+    display: inline-block;
+    text-align: left;
+    width: 50%;
+}
+
+.right{
+    display: inline-block;
+    text-align: right;
+    width: 50%;
+}
+
+
+.last{
+    text-align: right;
+}
+
+
+#sign{
+    margin-top: 100px;
+}
+

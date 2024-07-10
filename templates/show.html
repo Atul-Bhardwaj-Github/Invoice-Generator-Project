@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}Show{% endblock title %}
+
+{% block body %}
+
+<div class="container row mx-auto">
+    <div class="col">
+        <h1 class="text-center">Client Detail</h1>
+        <table class="table">
+                      
+              <tr>
+                <th>Id</th>
+                <td>{{clientobj.id}}</td>
+              </tr>
+              <tr>
+                <th>Company Name</th>
+                <td>{{clientobj.company_name}}</td>
+              </tr>
+              <tr>
+                <th>GST No</th>
+                <td>{{clientobj.gst_no}}</td>
+              </tr>
+              <tr>
+                <th>Address</th>
+                <td>{{clientobj.address}}</td>
+              </tr>
+              <tr>
+                <th>Created At</th>
+                <td>{{clientobj.created_at}}</td>
+                      
+              </tr>
+          </table>
+    </div>
+    <div class="col">
+        <div class="col">
+            <h1 class="text-center ">Service Provider Detail</h1>
+            <table class="table">    
+                  <tr>
+                    <th>Client</th>
+                    <td>{{service_providerObj.client}}</td>
+                  </tr>
+                  <tr>
+                    <th>Company Name</th>
+                    <td>{{service_providerObj.company_name}}</td>
+                  </tr>
+                  <tr>
+                    <th>Handled By</th>
+                    <td>{{service_providerObj.handled_by}}</td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <td>{{service_providerObj.email}}</td>
+                  </tr>
+                  <tr>
+                    <th>Phone No</th>
+                    <td>{{service_providerObj.phone_no}}</td>
+                  </tr>
+                  <tr>
+                    <th>Account No</th>
+                    <td>{{service_providerObj.account_no}}</td>
+                  </tr>
+                  <tr>
+                    <th>IFSC Code</th>
+                    <td>{{service_providerObj.ifsc_code}}</td>
+                  </tr>
+                  <tr>
+                    <th>Bank Name</th>
+                    <td>{{service_providerObj.bank_name}}</td>
+                  </tr>
+                  <tr>
+                    <th>GST No</th>
+                    <td>{{service_providerObj.gst_no}}</td>
+                  </tr>
+                  <tr>
+                    <th>Created At</th>
+                    <td>{{service_providerObj.delivered_at}}</td>
+                  </tr>
+              </table>
+        </div>
+
+    </div>
+
+    <div class="container mx-auto">
+        <table class="table">
+            <h1 class="text-center mt-5">Servives Details</h1>
+
+            <thead>
+              <th>Client</th>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th>Amount</th>
+              <th>Delivered At</th>
+            </thead>
+            <tbody>
+                {% for service in servicesobj %}
+              <tr class="table-active">
+                <td>{{service.client}}</td>
+                <td>{{service.description}}</td>
+                <td>{{service.quantity}}</td>
+                <td>{{service.amount}}</td>
+                <td>{{service.delivered_at}}</td>
+              </tr>
+              {% endfor %}
+              
+            </tbody>
+          </table>
+
+    </div>
+</div>
+
+
+
+{% endblock body %}

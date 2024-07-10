@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}X{% endblock title %}
+
+{% block body %}
+<h1 class="text-center">All Clients</h1>
+
+<table class="container table my-5">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Company Name</th>
+        <th scope="col">GST No</th>
+        <th scope="col">Address</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for client in clientobj %}
+      <tr>
+        <th>{{client.id}}</th>
+        <td>{{client.company_name}}</td>
+        <td>{{client.gst_no}}</td>
+        <td>{{client.address}}</td>
+        <td>{{client.created_at}}</td>
+        <td>
+            <a href="/report/{{client.id}}" class="btn btn-primary my-auto">GST Report</a>
+        </td>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+
+
+{% endblock body %}

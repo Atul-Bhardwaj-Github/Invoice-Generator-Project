@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Service Provider{% endblock title %}
+
+{% block body %}
+<div class="container">
+    <div><h2><i><b>Edit Details</b></i></h2></div>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="reset" class="btn btn-danger">Reset</button>       
+    </form>
+    <p id="x" style="color: powderblue;">{{address}}</p>
+
+
+<script>
+    // alert(document.getElementyID("x").innerHTML)
+    document.getElementById("address").innerHTML = document.getElementById("x").innerHTML
+</script>
+
+{% endblock body %}

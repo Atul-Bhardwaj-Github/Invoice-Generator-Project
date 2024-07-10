@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}X{% endblock title %}
+
+{% block body %}
+<h1 class="text-center">All Clients</h1>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Company Name</th>
+        <th scope="col">GST No</th>
+        <th scope="col">Address</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for client in clients %}
+      <tr>
+        <th>{{client.id}}</th>
+        <td>{{client.company_name}}</td>
+        <td>{{client.gst_no}}</td>
+        <td>{{client.address}}</td>
+        <td>{{client.created_at}}</td>
+        <td>
+            <a href="/show/{{client.id}}" class="btn btn-primary">Show</a>
+            <a href="/edit_client/{{client.id}}" class="btn btn-warning">Edit</a>
+            <a id="{{client.id}}" class="btn btn-danger" onclick="x({{client.id}})">Delete</a>
+        </td>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+
+  <script>
+    function x(id) {
+        y = confirm("Are you sure to delete this Client id "+id)
+        if (y) {
+            document.getElementById(id).href = "/delete_client/"+id;
+  
+        }
+    }
+  </script>
+
+
+{% endblock body %}

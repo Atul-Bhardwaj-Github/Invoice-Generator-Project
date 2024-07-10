@@ -1,0 +1,146 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PDF Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/report.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.common.min.css" />
+  <script src="https://kendo.cdn.telerik.com/2017.1.223/js/jszip.min.js"></script>
+  <script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <style>
+        .element{
+    width: 80%;
+    margin:20px auto;
+}
+
+#logo{
+    clip-path: circle(50% at 50% 50%);
+    width: 120px;
+}
+
+
+hr{
+    width: 80%;
+    margin: 20px auto;
+}
+
+
+.left{
+    display: inline-block;
+    text-align: left;
+    width: 50%;
+}
+
+.right{
+    display: inline-block;
+    text-align: right;
+    width: 50%;
+}
+
+
+.last{
+    text-align: right;
+}
+
+
+#sign{
+    margin-top: 100px;
+}
+
+
+    </style>
+
+    <section id='tosave' style="width:80%; margin:0 auto; padding:30px;">
+
+        <div class="container element">
+            <div class="left"><img id="logo" src="https://static.vecteezy.com/system/resources/thumbnails/017/208/923/small/luxury-letter-a-logo-a-logotype-for-elegant-and-stylish-fashion-symbol-vector.jpg"  alt=""></div><h1 class="right my-auto"><b>Invoice</b></h1>
+        </div>
+
+        <hr>
+
+        <div class="container element">
+            <div class="left">Billing To:<br>{{clientobj.company_name}}<br>{{clientobj.address}}<br></div><div class="right">Invoice NO. <br>{{clientobj.id}}<br>{{clientobj.created_at}}</div>
+        </div>
+
+        <hr>
+
+        <table class="table container element">
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th class="last">Total</th>
+
+            </tr>
+
+            {% for service in servicesobj %}
+            <tr>
+                <td>{{service.description}}</td>
+                <td>{{service.quantity}}</td>
+                <td>{{service.amount}}</td>
+                <td class="last">{{service.total_amount}}</td>
+            
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <div class="container element">
+            <div class="right" style="width: 100%;">
+                <b>Subtotal</b> : {{servicetotal}} <br>
+                <b>Tax(18%)</b> :    {{GST}} <br>
+                <b>Total</b>    :  {{withGST}}
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 class="container element" style="margin-left: 30%; margin-top:50px;">Thank You!</h2>
+
+
+        <div class="container element" id="sign">
+            <div class="left"><b>Service Provider Sign</b><br> GST NO: {{service_providerObj.gst_no}} <br> Bank Name: {{service_providerObj.bank_name}} <br> Account No: {{service_providerObj.account_no}}</div><div class="right mt-0"><b>Client Sign</b></div>
+        </div>
+        
+
+    </section>      
+    <div style="display: flex; justify-content: center; align-items: center; height: 30vh;">
+        <button id="pdf-generate">Save</button>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+
+    <script>
+        kendo.pdf.defineFont({
+          "DejaVu Sans": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans.ttf",
+          "DejaVu Sans|Bold": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+          "DejaVu Sans|Bold|Italic": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+          "DejaVu Sans|Italic": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+        });
+      </script>
+    
+      <script>
+        function getPDF(selector) {
+          kendo.drawing.drawDOM($(selector)).then(function (group) {
+            kendo.drawing.pdf.saveAs(group, 'Invoice.pdf');
+          });
+        }
+      </script>
+    
+      <script type="text/javascript">
+        // document.getElementById('pdf-generate').style.display=None;
+        $('#pdf-generate').click(function () {
+          getPDF('section');
+        })
+      </script>
+</body>
+
+</html>
